@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>รายงานผลการฝึกงาน | ณัฐกานต์ รัตนะพันธ์</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: DM Sans (Eng) & Kanit (Thai) -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['DM Sans', 'Kanit', 'sans-serif'],
+                    },
+                    colors: {
+                        stone: {
+                            50: '#fafaf9',  
+                            100: '#f5f5f4',
+                            200: '#e7e5e4',
+                            300: '#d6d3d1',
+                            400: '#a8a29e',
+                            500: '#78716c',
+                            600: '#57534e',
+                            800: '#292524',
+                            900: '#1c1917',  
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .nav-scrolled {
+            background: rgba(250, 250, 249, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e7e5e4;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        ::selection {
+            background-color: #78716c;
+            color: #fafaf9;
+        }
+
+        /* Hero Background Fade Transition */
+        #hero-bg-slider {
+            transition: background-image 1.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900 antialiased font-sans">
+
+    <!-- Premium Top Bar (เส้นแบ่งความพรีเมียม) -->
+    <div class="fixed top-0 left-0 w-full h-1.5 bg-gradient-to-r from-stone-200 via-stone-500 to-stone-200 z-[60]"></div>
+
+    <!-- Navigation (ปรับ top ให้หลบเส้นพรีเมียม) -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-500 bg-transparent py-5 top-1.5">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo Image -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer">
+                    <img src="https://lh3.googleusercontent.com/pw/AP1GczPlbvbP9wZteWpNHxjcfYkUrz0yEW071UJcFN_1-wSdZSDkonTPLLKcX5FzfMMwrblVi54sroLBGUYmt6cjD5ixG_LlQJocr082vYCEN21eYKsRjLcso8bJaQr4QcXmO4k8JWvEuxVq-JsbMa0jfw_Dpg=w1920-h635-s-no-gm?authuser=0" alt="TPBI Logo" class="h-8 md:h-10 object-contain">
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex space-x-10 items-center">
+                    <a href="#overview" class="text-stone-600 hover:text-stone-900 transition-colors text-sm font-medium tracking-wide">บทนำ</a>
+                    <a href="#responsibilities" class="text-stone-600 hover:text-stone-900 transition-colors text-sm font-medium tracking-wide">ความรับผิดชอบ</a>
+                    <a href="#projects" class="text-stone-600 hover:text-stone-900 transition-colors text-sm font-medium tracking-wide">คลังผลงาน</a>
+                    <a href="#contact" class="text-stone-600 hover:text-stone-900 transition-colors text-sm font-medium tracking-wide">ประวัติผู้จัดทำ</a>
+                </div>
+
+                <!-- Button & Mobile Toggle -->
+                <div class="flex items-center gap-4">
+                    <div class="hidden sm:block">
+                        <a href="#thesis" class="inline-flex items-center gap-2 bg-stone-900 text-stone-50 px-6 py-2.5 rounded-full text-sm font-light hover:bg-stone-700 hover:shadow-md transition-all transform hover:-translate-y-0.5">
+                            <i class="ph-light ph-book-open text-lg"></i> เล่มรายงาน
+                        </a>
+                    </div>
+                    <button id="mobile-menu-btn" class="lg:hidden text-stone-900 hover:text-stone-500 transition-colors focus:outline-none">
+                        <i class="ph-light ph-list text-3xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden lg:hidden absolute top-[calc(100%+6px)] left-0 w-full bg-white/95 backdrop-blur-md border-b border-stone-200 shadow-lg py-4 transition-all duration-300">
+            <div class="flex flex-col px-6 space-y-4">
+                <a href="#overview" class="mobile-link text-stone-600 hover:text-stone-900 text-sm font-medium tracking-wide">บทนำ</a>
+                <a href="#responsibilities" class="mobile-link text-stone-600 hover:text-stone-900 text-sm font-medium tracking-wide">ความรับผิดชอบ</a>
+                <a href="#projects" class="mobile-link text-stone-600 hover:text-stone-900 text-sm font-medium tracking-wide">คลังผลงาน</a>
+                <a href="#contact" class="mobile-link text-stone-600 hover:text-stone-900 text-sm font-medium tracking-wide">ประวัติผู้จัดทำ</a>
+                <a href="#thesis" class="mobile-link sm:hidden inline-flex items-center justify-center gap-2 bg-stone-900 text-stone-50 px-6 py-2.5 rounded-full text-sm font-light mt-2">
+                    <i class="ph-light ph-book-open text-lg"></i> เล่มรายงาน
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section (With Auto Slider Background) -->
+    <section id="hero" class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+        <!-- Background Slider -->
+        <div id="hero-bg-slider" class="absolute inset-0 bg-cover bg-center transform scale-105" style="background-image: url('https://lh3.googleusercontent.com/pw/AP1GczOpxnFYO50Dw02ufzbsLqbYpnnv8cpb6OjLOyFVPDjdC404H5lwiiY1IwbxxOFwJ3ScQXCe-IBFumE8Xr43blzzEUup9Y1EQpKfQgDD_r9JjOrOmcy60OmPN9dI8y1FV1YMv4FKGR9e5e8OcJoP4wxzVw=w1075-h721-s-no-gm?authuser=0');"></div>
+        
+        <!-- White/Glass Overlay -->
+        <div class="absolute inset-0 bg-stone-50/85 backdrop-blur-[2px]"></div>
+
+        <!-- Content -->
+        <div class="w-full max-w-7xl mx-auto px-6 lg:px-12 relative z-10 reveal">
+            <p class="text-stone-400 font-medium tracking-[0.15em] uppercase mb-6 text-sm">
+                Internship Report — Class of 2026
+            </p>
+            <h1 class="text-6xl md:text-8xl lg:text-9xl font-semibold text-stone-900 mb-6 leading-[1.05] tracking-tight">
+                ประสบการณ์<br/>
+                <span class="font-bold italic">วิชาชีพ</span>
+            </h1>
+            
+            <div class="border-l-4 border-stone-300 pl-5 py-2 mb-10 max-w-2xl">
+                <h2 class="text-xl md:text-2xl text-stone-600 font-medium leading-relaxed">
+                    โครงงาน: การพัฒนาสื่อกราฟฟิก และสื่อเสียง เพื่อประชาสัมพันธ์งานกิจกรรม
+                </h2>
+            </div>
+
+            <div class="max-w-2xl">
+                <p class="text-stone-600 text-lg leading-relaxed font-light mb-12">
+                    บันทึกการเรียนรู้ การทำงานจริง และผลงานที่สร้างสรรค์ขึ้นโดย <strong class="text-stone-900 font-medium">นางสาวณัฐกานต์ รัตนะพันธ์</strong> ระหว่างการฝึกประสบการณ์วิชาชีพ ณ <br>
+                    <strong class="font-medium text-stone-900 text-xl inline-block mt-2">บริษัท ทีพีบีไอ จำกัด (มหาชน)</strong>
+                </p>
+            </div>
+            
+            <div class="flex items-center gap-6 mt-4">
+                <a href="#overview" class="group flex items-center gap-3 text-sm font-semibold uppercase tracking-widest text-stone-900 bg-white px-8 py-4 rounded-full hover:bg-stone-200 transition-all shadow-sm">
+                    อ่านรายงาน <i class="ph-bold ph-arrow-down group-hover:translate-y-1 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section id="overview" class="py-32 bg-stone-100">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                <!-- Left Content -->
+                <div class="reveal order-2 lg:order-1">
+                    <span class="block w-12 h-[1px] bg-stone-400 mb-6"></span>
+                    <h3 class="text-3xl md:text-4xl font-medium text-stone-900 mb-8 leading-tight">วัฒนธรรมองค์กร <br>และการเรียนรู้</h3>
+                    
+                    <div class="space-y-6 text-stone-600 font-light leading-relaxed">
+                        <p>
+                            บรรยากาศการทำงานเต็มไปด้วยความท้าทายที่ต้องประสานงานกับผู้คนหลากหลายฝ่ายอยู่ตลอดเวลา ทำให้ได้เรียนรู้ทักษะการแก้ปัญหาเฉพาะหน้าอย่างเป็นระบบ 
+                        </p>
+                        <p>
+                            ตั้งแต่การบริหารจัดการยานพาหนะไปจนถึงการเตรียมรับงาน Audit สำคัญ ซึ่งช่วยฝึกความละเอียดรอบคอบและการบริหารเวลา (Multi-tasking) ให้มีประสิทธิภาพในสภาวะความกดดัน
+                        </p>
+                    </div>
+
+                    <div class="flex gap-16 mt-12 pt-8 border-t border-stone-300">
+                        <div>
+                            <p class="text-stone-400 text-xs tracking-widest uppercase mb-2">ตำแหน่ง</p>
+                            <p class="font-medium text-stone-900">เจ้าหน้าที่ธุรการฝ่ายทรัพยากรบุคคล<br>(General Administration Officer)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Image -->
+                <div class="reveal h-full min-h-[400px] lg:min-h-[600px] flex items-center justify-center relative overflow-hidden group rounded-2xl order-1 lg:order-2 bg-stone-200">
+                    <img src="https://lh3.googleusercontent.com/pw/AP1GczOZqzZai1EXQLgs6wnIxDTAqTha-gHnmC2IKY9LhtilL8KqkDfVi_cgwiN13STtDJNhhUdSZVusIC1phqjNz9SredSEJa24IXs7Krk_kpGbLO2HBn9NJ-nxwMLCRJXnZWS9tg9ZfYDmK6xFQ40wV9ITsQ=w1549-h1033-s-no-gm?authuser=0" alt="Team Collaboration" class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Responsibilities Section -->
+    <section id="responsibilities" class="py-32 bg-stone-50">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="mb-24 reveal flex flex-col md:flex-row md:justify-between md:items-end">
+                <div>
+                    <span class="block w-12 h-[1px] bg-stone-400 mb-6"></span>
+                    <h3 class="text-3xl md:text-5xl font-light text-stone-900 leading-tight">บทบาทหน้าที่<br/><span class="font-medium">หลักที่ได้รับมอบหมาย</span></h3>
+                </div>
+                <p class="text-stone-500 font-light mt-6 md:mt-0 max-w-sm border-l border-stone-300 pl-4">สรุปภาระงานหลักที่ได้รับผิดชอบตลอดระยะเวลาการฝึกประสบการณ์วิชาชีพในฝ่ายทรัพยากรบุคคล</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                
+                <!-- Card 1 -->
+                <div class="reveal group relative bg-white p-10 rounded-2xl border border-stone-200 hover:border-stone-400 transition-all duration-300 hover:-translate-y-2 overflow-hidden shadow-sm hover:shadow-lg">
+                    <div class="absolute -right-4 -top-6 text-[120px] font-bold text-stone-50 opacity-50 group-hover:scale-110 transition-transform duration-500 pointer-events-none">01</div>
+                    <div class="relative z-10">
+                        <i class="ph-light ph-car-profile text-4xl text-stone-800 mb-6 block"></i>
+                        <h4 class="text-xl font-medium text-stone-900 mb-4">การบริหารยานพาหนะ<br>และอาคารสถานที่</h4>
+                        <p class="text-stone-500 font-light leading-relaxed text-sm">
+                            วางแผนจัดสรรคิวรถยนต์ ควบคุมการทำงานของแม่บ้าน รปภ. และจัดทำบัตรพนักงานทุกประเภท รวมถึงควบคุมใบผ่านเข้า-ออกโรงงาน
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="reveal group relative bg-white p-10 rounded-2xl border border-stone-200 hover:border-stone-400 transition-all duration-300 hover:-translate-y-2 overflow-hidden shadow-sm hover:shadow-lg" style="transition-delay: 100ms;">
+                    <div class="absolute -right-4 -top-6 text-[120px] font-bold text-stone-50 opacity-50 group-hover:scale-110 transition-transform duration-500 pointer-events-none">02</div>
+                    <div class="relative z-10">
+                        <i class="ph-light ph-users-three text-4xl text-stone-800 mb-6 block"></i>
+                        <h4 class="text-xl font-medium text-stone-900 mb-4">งานรับรองและ<br>สนับสนุนกิจกรรม</h4>
+                        <p class="text-stone-500 font-light leading-relaxed text-sm">
+                            เตรียมความพร้อมรับคณะผู้ตรวจประเมิน (Audit) ทำงานร่วมกับฝ่ายขายรองรับลูกค้า และเป็นพิธีกรจัดกิจกรรมตามแผนประจำปี
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="reveal group relative bg-white p-10 rounded-2xl border border-stone-200 hover:border-stone-400 transition-all duration-300 hover:-translate-y-2 overflow-hidden shadow-sm hover:shadow-lg" style="transition-delay: 200ms;">
+                    <div class="absolute -right-4 -top-6 text-[120px] font-bold text-stone-50 opacity-50 group-hover:scale-110 transition-transform duration-500 pointer-events-none">03</div>
+                    <div class="relative z-10">
+                        <i class="ph-light ph-file-text text-4xl text-stone-800 mb-6 block"></i>
+                        <h4 class="text-xl font-medium text-stone-900 mb-4">งานเอกสารทางกฎหมาย<br>และราชการ</h4>
+                        <p class="text-stone-500 font-light leading-relaxed text-sm">
+                            จัดทำเอกสารส่งราชการ เช่น ภาษีน้ำมัน ค่าขยะประจำเดือน และดูแลระบบรับ-ส่งพัสดุจากสำนักงานใหญ่ให้ถูกต้องแม่นยำ
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="reveal group relative bg-white p-10 rounded-2xl border border-stone-200 hover:border-stone-400 transition-all duration-300 hover:-translate-y-2 overflow-hidden shadow-sm hover:shadow-lg">
+                    <div class="absolute -right-4 -top-6 text-[120px] font-bold text-stone-50 opacity-50 group-hover:scale-110 transition-transform duration-500 pointer-events-none">04</div>
+                    <div class="relative z-10">
+                        <i class="ph-light ph-calculator text-4xl text-stone-800 mb-6 block"></i>
+                        <h4 class="text-xl font-medium text-stone-900 mb-4">งานจัดซื้อและ<br>บริหารงบประมาณ</h4>
+                        <p class="text-stone-500 font-light leading-relaxed text-sm">
+                            เปิด PR สั่งของใช้ผ่านระบบ BOSS และ SAP ดูแลค่าใช้จ่ายภายในหน่วยงาน งบประมาณกิจกรรม และควบคุมอุปกรณ์สำนักงาน
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="reveal group relative bg-white p-10 rounded-2xl border border-stone-200 hover:border-stone-400 transition-all duration-300 hover:-translate-y-2 overflow-hidden shadow-sm hover:shadow-lg" style="transition-delay: 100ms;">
+                    <div class="absolute -right-4 -top-6 text-[120px] font-bold text-stone-50 opacity-50 group-hover:scale-110 transition-transform duration-500 pointer-events-none">05</div>
+                    <div class="relative z-10">
+                        <i class="ph-light ph-megaphone text-4xl text-stone-800 mb-6 block"></i>
+                        <h4 class="text-xl font-medium text-stone-900 mb-4">การสื่อสารภายใน<br>และประชาสัมพันธ์</h4>
+                        <p class="text-stone-500 font-light leading-relaxed text-sm">
+                            ผลิตสื่อผ่าน Email, บอร์ดประกาศ, หน่วยข่าวกรอง และกระจายเสียงตามสาย เพื่อแจ้งข่าวสารให้พนักงานทราบอย่างทั่วถึง
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-32 bg-stone-900 text-stone-50 selection:bg-stone-500 selection:text-white">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            
+            <!-- Header -->
+            <div class="mb-16 reveal flex flex-col md:flex-row justify-between items-start md:items-end border-b border-stone-700 pb-8 gap-6">
+                <div>
+                    <span class="block w-12 h-[1px] bg-stone-500 mb-6"></span>
+                    <h3 class="text-4xl md:text-5xl font-light mb-4 tracking-tight">คลังผลงาน</h3>
+                    <p class="text-stone-400 font-light">รวบรวมสื่อโทรทัศน์ สื่อกราฟิก สื่อเสียง และภาพบรรยากาศกิจกรรม (คลิกเพื่อรับชม)</p>
+                </div>
+                
+                <!-- ปุ่ม Drive -->
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <a href="https://drive.google.com/drive/folders/1v7qhUQUja44M4aMO6ZX0h2_8WNEzpMnT?usp=drive_link" target="_blank" class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-stone-100 text-stone-900 rounded-full text-sm font-semibold hover:bg-white hover:scale-105 transition-all shadow-lg">
+                        <i class="ph-bold ph-folder-notch-open"></i> คลังสื่อกราฟิกทั้งหมด
+                    </a>
+                    <a href="https://drive.google.com/drive/folders/17y1SHYTk66qz4Tv9rCIw7dSvRPIzUyCL?usp=sharing" target="_blank" class="inline-flex items-center justify-center gap-2 px-6 py-3 border border-stone-600 text-stone-300 rounded-full text-sm font-medium hover:bg-stone-800 hover:text-white transition-all">
+                        ไดร์ฟผลงานรวม <i class="ph-light ph-arrow-square-out"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- หมวด 1: ผลงานเด่น -->
+            <div class="mb-12 reveal">
+                <h4 class="text-xl font-medium text-stone-300 mb-6 flex items-center gap-2"><i class="ph-fill ph-star text-yellow-500"></i> ผลงานสื่อสร้างสรรค์ที่โดดเด่น</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+                    
+                    <a href="https://drive.google.com/file/d/1Y17VWLRzwZcDv8plZhNbd88apNVy8z-4/view?usp=drive_link" target="_blank" class="group cursor-pointer block play-btn-wrapper">
+                        <div class="aspect-video bg-stone-800 rounded-xl overflow-hidden relative mb-4">
+                            <img src="https://lh3.googleusercontent.com/pw/AP1GczO3rNeMumG39CWeb8v4gHD4L-kTa-6STcn0NqBGcuQMRZfYpimc-OVZJa43YA_uImGn0uxqpgeyLn5lOHH3qzpf5JiVbxNnOXzTK0bqByzgp-Ex0__SqtIPYCt0c064mwXxbTOguVsjsmZDlpnc2c6Tvg=w1331-h750-s-no-gm?authuser=0" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 group-hover:opacity-50 transition-all duration-700">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="play-icon w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm border border-white/50 flex items-center justify-center text-white transition-all duration-300">
+                                    <i class="ph-fill ph-play text-xl ml-1"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-stone-400 text-xs tracking-widest uppercase mb-1">สื่อ TV / Video</p>
+                        <h5 class="text-lg font-medium text-stone-100 group-hover:text-stone-300 transition-colors">กิจกรรมวันวาเลนไทน์</h5>
+                    </a>
+
+                    <a href="https://drive.google.com/file/d/1yOkRoggab8aqidv_3n-PcpKqaFCI2a-q/view?usp=drive_link" target="_blank" class="group cursor-pointer block play-btn-wrapper">
+                        <div class="aspect-video bg-stone-800 rounded-xl overflow-hidden relative mb-4">
+                            <img src="https://lh3.googleusercontent.com/pw/AP1GczNTojdYYOzcEhPaZkyDVxZjVT5QTMOT3fxQzUWCVsO5cfuoMZdofPheAVBVVW6aCftIknJf9NqS6d-5VufAUQfYtHDb7pHKluvtJgIFfg84NHQk6GMBLh2ngG4vFLUc0_X05rx828xUIGwi5K_Dz3MC9A=w1342-h752-s-no-gm?authuser=0" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 group-hover:opacity-50 transition-all duration-700">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="play-icon w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm border border-white/50 flex items-center justify-center text-white transition-all duration-300">
+                                    <i class="ph-fill ph-play text-xl ml-1"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-stone-400 text-xs tracking-widest uppercase mb-1">สื่อ Video</p>
+                        <h5 class="text-lg font-medium text-stone-100 group-hover:text-stone-300 transition-colors">งานเกษียณอายุ ประจำปี 2568 (ระยอง)</h5>
+                    </a>
+
+                    <a href="https://drive.google.com/file/d/1Yuk65o_hY-EXk5YpIBT83HF08y6ED_rQ/view?usp=drive_link" target="_blank" class="group cursor-pointer block play-btn-wrapper">
+                        <div class="aspect-video bg-stone-800 rounded-xl overflow-hidden relative mb-4">
+                            <img src="https://lh3.googleusercontent.com/pw/AP1GczM85PknQW5dvivkWai6DFN0q3jSeQiFkYl0D6kRyCIRFoLQcko3EE75uajh4PIEFYXzXcxWeVeg9l0HdqVuFtN5Lw-VUwHhX45VfCLnvrahxgvXSf8Bfngfm5TcsvVSsrd5yoA5kpPFPMTLtSHWvmR20w=w623-h881-s-no-gm?authuser=0" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 group-hover:opacity-50 transition-all duration-700 object-top">
+                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div class="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center text-stone-900">
+                                    <i class="ph-light ph-magnifying-glass-plus text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-stone-400 text-xs tracking-widest uppercase mb-1">สื่อกราฟิก / TV</p>
+                        <h5 class="text-lg font-medium text-stone-100 group-hover:text-stone-300 transition-colors">กิจกรรมวันตรุษจีน</h5>
+                    </a>
+
+                    <a href="https://drive.google.com/file/d/1HZwgos3_GvTB3vASj0OAfFLhL7qsiz9f/view?usp=drive_link" target="_blank" class="group cursor-pointer block play-btn-wrapper">
+                        <div class="aspect-video bg-stone-800 rounded-xl overflow-hidden relative mb-4">
+                            <img src="https://lh3.googleusercontent.com/pw/AP1GczO69-xIh_UZA3Dmcwoi6E1yPs_ZxPvbc0s7CO5b8BGhGwrdX583N7Xu5Mwq6e0ypr4Rm1An-bD9hpMS60fXCiC_UAiEY4y_hBQb_-Ym6NMSiCPROjt8hIN6Npz8nX8DHsyrrnBIaP86cJ8YxnJTjiMlYA=w617-h872-s-no-gm?authuser=0" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 group-hover:opacity-50 transition-all duration-700 object-top">
+                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div class="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center text-stone-900">
+                                    <i class="ph-light ph-magnifying-glass-plus text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-stone-400 text-xs tracking-widest uppercase mb-1">สื่อกราฟิก / TV</p>
+                        <h5 class="text-lg font-medium text-stone-100 group-hover:text-stone-300 transition-colors">กิจกรรมส่งท้ายปีเก่าต้อนรับปีใหม่</h5>
+                    </a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 reveal">
+                <!-- หมวด 2: ลิสต์ผลงานวิดีโอเพิ่มเติม -->
+                <div>
+                    <h4 class="text-lg font-medium text-stone-300 mb-4 border-b border-stone-700 pb-2"><i class="ph-light ph-video-camera text-stone-400"></i> คลังวิดีโอและสื่อโทรทัศน์อื่นๆ</h4>
+                    <ul class="space-y-3">
+                        <li><a href="https://drive.google.com/file/d/15ngukxUU4-vbOn1tbuGK5PCJ-qeMrrNg/view?usp=drive_link" target="_blank" class="flex items-center gap-3 text-stone-400 hover:text-white transition-colors"><i class="ph-light ph-play-circle text-xl"></i> สื่อ TV กิจกรรมวันเด็ก</a></li>
+                        <li><a href="https://drive.google.com/file/d/1tqLQ-95iSo6YuSJ57Ep9a-LqjibrAoXP/view?usp=drive_link" target="_blank" class="flex items-center gap-3 text-stone-400 hover:text-white transition-colors"><i class="ph-light ph-play-circle text-xl"></i> สื่อ TV กิจกรรม TPBI Run For Fun</a></li>
+                        <li><a href="https://drive.google.com/file/d/12tjFNy2qQ__zajdu_4pQYtM_aHFPa5DC/view?usp=drive_link" target="_blank" class="flex items-center gap-3 text-stone-400 hover:text-white transition-colors"><i class="ph-light ph-play-circle text-xl"></i> สื่อ TV กิจกรรมวันเกิดคุณสมศักดิ์</a></li>
+                        <li><a href="https://drive.google.com/file/d/1OHh70bg9zaMvwa3letUB_qD15JiZBT1G/view?usp=drive_link" target="_blank" class="flex items-center gap-3 text-stone-400 hover:text-white transition-colors"><i class="ph-light ph-play-circle text-xl"></i> สื่อ TV กิจกรรมบริจาคโลหิต</a></li>
+                        <li><a href="https://drive.google.com/file/d/1i4Ree359w7VKLg8SvPTI6mmkG-Wubvd_/view?usp=drive_link" target="_blank" class="flex items-center gap-3 text-stone-400 hover:text-white transition-colors"><i class="ph-light ph-play-circle text-xl"></i> Video งานเกษียณอายุ (สามพราน)</a></li>
+                        <li><a href="https://lh3.googleusercontent.com/pw/AP1GczMCxFLjn-10_00La9_9pzwitWQAv_KNcyK2OKfJuSHmKvuKlQdfQPLl92m0RANROmQk1-Kvtviuyj7R1RPiFl6jK_-n4vSEypGEV1MJS6TTYWOq6JOQMsxSOt4sEI-7SW1ESDQdSkX4p0jWrtKBEn9Nxw=w615-h876-s-no-gm?authuser=0" target="_blank" class="flex items-center gap-3 text-stone-400 hover:text-white transition-colors"><i class="ph-light ph-image text-xl"></i> โปสเตอร์ งานเกษียณอายุ 2568</a></li>
+                    </ul>
+                </div>
+
+                <!-- หมวด 3: สื่อเสียงประชาสัมพันธ์ -->
+                <div>
+                    <h4 class="text-lg font-medium text-stone-300 mb-4 border-b border-stone-700 pb-2"><i class="ph-light ph-speaker-high text-stone-400"></i> สื่อเสียงประชาสัมพันธ์ตามสาย</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <a href="https://drive.google.com/file/d/1in7TrFPtaz1pourytZ1KmC2ROz__ytxi/view?usp=drive_link" target="_blank" class="group block relative rounded-lg overflow-hidden h-32 bg-stone-800">
+                            <img src="https://lh3.googleusercontent.com/pw/AP1GczP5MjEaugCXttWNU2amMDGdxx6fwcrK4islsddUsIU6CuCXGlJG8UzPAQJtzGFSg0dtPsCu-LA7fW_nQXXXWQe7dKCrVByTWFuYD0jS6Q8PvXqvykk_sUmnhmdNcvcP4AeXiVPlbFGagi9aAPxhn_ZYDw=w1024-h572-s-no-gm?authuser=0" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 group-hover:opacity-40 transition-all duration-700">
+                            <div class="absolute inset-0 flex flex-col justify-end p-4 bg-gradient-to-t from-stone-900/90 to-transparent">
+                                <i class="ph-fill ph-speaker-hifi text-2xl text-stone-300 mb-1 group-hover:text-white"></i>
+                                <h5 class="font-medium text-white text-sm">ประกาศเสียง ตลาดบ่าย</h5>
+                            </div>
+                        </a>
+                        <a href="https://drive.google.com/file/d/1SZrWPaNUCNRMeKsrrFoE50EqbJiGnuc8/view?usp=drive_link" target="_blank" class="group block relative rounded-lg overflow-hidden h-32 bg-stone-800">
+                            <img src="https://lh3.googleusercontent.com/pw/AP1GczP3s87MgVGsuH-GESsmIp0K1cqUwMaVD9L6n-DzDoUHOWhkZeJV9qBXmKXbvls17T9SUfHCjY01HzjjF8yTqYwuNeW6G8G_J5RXVbmgzPsuK8hhjEUmoQ-T0wRe02TOa8yoE55bBPhweVA3s6VETpp2Qw=w1850-h1033-s-no-gm?authuser=0" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 group-hover:opacity-40 transition-all duration-700">
+                            <div class="absolute inset-0 flex flex-col justify-end p-4 bg-gradient-to-t from-stone-900/90 to-transparent">
+                                <i class="ph-fill ph-hands-praying text-2xl text-stone-300 mb-1 group-hover:text-white"></i>
+                                <h5 class="font-medium text-white text-sm">ประกาศเสียง งานทำบุญ</h5>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- หมวด 4: แกลเลอรีประมวลภาพกิจกรรม -->
+            <div class="mt-24 reveal">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
+                    <div>
+                        <h4 class="text-2xl font-medium text-stone-100 mb-2">ประมวลภาพกิจกรรมและการทำงาน</h4>
+                        <p class="text-stone-400 font-light text-sm">รวมภาพบรรยากาศการจัดกิจกรรม การถ่ายทำสื่อ และการปฏิบัติหน้าที่ในแผนก HR</p>
+                    </div>
+                    <a href="https://photos.app.goo.gl/3Szg8hfVpK9R52U47" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 bg-stone-800 text-stone-200 rounded-lg text-sm font-medium hover:bg-stone-700 hover:text-white transition-all shadow-sm border border-stone-700">
+                        <i class="ph-light ph-images text-lg"></i> ดูอัลบั้มภาพทั้งหมด
+                    </a>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+                    <div class="aspect-square bg-stone-800 rounded-lg overflow-hidden cursor-pointer group"><img src="https://lh3.googleusercontent.com/pw/AP1GczPiV-pmDY5Zfga6PC5cXd7VvJpOLVw01ccbgzJB2G_fl6CxUX8fU8daTbcZXPf9qL0TkaFLhlfViDatIBvTT4b3b7pWcogfVlMQEqYAR079Vfjf6cqW035gsAJIaBGCN_fV-yRPFUVzLFduliP_mIVDcw=w1549-h1033-s-no-gm?authuser=0" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"></div>
+                    <div class="aspect-square bg-stone-800 rounded-lg overflow-hidden cursor-pointer group"><img src="https://lh3.googleusercontent.com/pw/AP1GczOpxnFYO50Dw02ufzbsLqbYpnnv8cpb6OjLOyFVPDjdC404H5lwiiY1IwbxxOFwJ3ScQXCe-IBFumE8Xr43blzzEUup9Y1EQpKfQgDD_r9JjOrOmcy60OmPN9dI8y1FV1YMv4FKGR9e5e8OcJoP4wxzVw=w1075-h721-s-no-gm?authuser=0" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"></div>
+                    <div class="aspect-square bg-stone-800 rounded-lg overflow-hidden cursor-pointer group"><img src="https://lh3.googleusercontent.com/pw/AP1GczNi2Dc_zwK9W_b7BTmyA3cE9h_pdEN4VT8qfRxSgZa_qLGOGlcsCT0xK8Uh65kj6OwsYN4tmGKAMTlp-Z8VNmzCZr7mTGPLnLtMGOURtuWkxY7_GJFy23SIOav736QeMlenlZwYsyEY87coa8eheGB-_A=w1072-h645-s-no-gm?authuser=0" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"></div>
+                    <div class="aspect-square bg-stone-800 rounded-lg overflow-hidden cursor-pointer group"><img src="https://lh3.googleusercontent.com/pw/AP1GczNKp0D-bXQ8lz8cFUhhIbomVAE5zEzJtj7407VS4Dmd5JTuieuANgqe6-6HvZSPScW78QvER_LLyoymny0ce67-eEEPDkmEM_VvvYNzkirKaGZnyJ1VmWs2f9LS1zI-RRAqzOlVyUmkmU1oh-Ub9R5ekw=w1085-h733-s-no-gm?authuser=0" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"></div>
+                    <div class="aspect-square bg-stone-800 rounded-lg overflow-hidden cursor-pointer group"><img src="https://lh3.googleusercontent.com/pw/AP1GczO4Wq7h849uY8l3Ar0iqaTc0YqmNinofSOd5D-JkLPwNgOSm6wM2YeIatZFQEosz6wWjHLc4J1Nalk8A4l6wxiDL2oCOKeRcxI9r786f_R3OuvDlpPhQA09v82vO0ZfjVkOwCHoJeBIvrfVM6VkyjajqA=w1549-h1033-s-no-gm?authuser=0" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"></div>
+                    <div class="aspect-square bg-stone-800 rounded-lg overflow-hidden cursor-pointer group"><img src="https://lh3.googleusercontent.com/pw/AP1GczMSbhu_oRXJlRhfsOV_Y7SdPNmqaXy-pTsWIHL7sa341_I7BJ1hwnh8owQNJupsSDXgJcrJlodS4EKMWmxKKdIhUCd7b43Dwqv_q7nFcU8PoSZt6b-k5zqrwl7OF3WZRIJlw9p_i8rjtmVQ0VcG3srDvQ=w1549-h1033-s-no-gm?authuser=0" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"></div>
+                    <div class="aspect-square bg-stone-800 rounded-lg overflow-hidden cursor-pointer group md:hidden lg:block"><img src="https://lh3.googleusercontent.com/pw/AP1GczNe2rA6Q_UBc9wPEematn4EuPlkdyc68EyFwE5yM7MZWBy4bYNFpG2YWASa7j8k_pXYv2BO0Vou1QIMNX4YfOHu5Q6ooDlCo6tW5tvUCRNusYlfxC8f2KKmTt2zCZK0Wn3Qs1fOMOCFiyXfaDliSo8CEQ=w1549-h1033-s-no-gm?authuser=0" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"></div>
+                    <div class="aspect-square bg-stone-800 rounded-lg overflow-hidden cursor-pointer group md:hidden lg:block"><img src="https://lh3.googleusercontent.com/pw/AP1GczOGrwz-EurlbX10nZOcY5bIy6Im3YI7mYce5lm6LBCTJun1Xwpt6hTmndyb7nKl5YX34DPUnQflVQJM1b_UIKSjLGOSYrr41EKYH09VdfBSkDc3dT4ZR750VCI4Fh-n-Z5i1wM5SJnvjB_iv0ZvzUslDw=w1549-h1033-s-no-gm?authuser=0" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"></div>
+                    <div class="aspect-square bg-stone-800 rounded-lg overflow-hidden cursor-pointer group hidden md:block"><img src="https://lh3.googleusercontent.com/pw/AP1GczND71TyVVzXKBvKGIszM1WREyN8liPZcnzTDOgGc9dH-g_miVQG-RcUKklezf9Vd4Fik7sOUpw-Ydt2lbPNbEQ3Gv_WzazT3b9XvmEByPs58gCP7BRKf5SauXfc6QgJaMhc3d0HZDekLf9rjsbB8PiTtQ=w1706-h960-s-no-gm?authuser=0" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"></div>
+                    <div class="aspect-square bg-stone-800 rounded-lg overflow-hidden cursor-pointer group hidden md:block"><img src="https://lh3.googleusercontent.com/pw/AP1GczOfF9ojflu5lReb1ez_TVsPVNy6MPjUF97qd7eRlQjbMLBPdabwpKXrupD-f4p_YA_J-2GXpcw12o1t5iNbl3Iaxkf-sD_wD1yEq1zGRtuNj6BawThSW7FVfMw8v7qVLItNRyKKG3M0H1b8zsQvTtG3EA=w1170-h769-s-no-gm?authuser=0" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"></div>
+                    <div class="aspect-square bg-stone-800 rounded-lg overflow-hidden cursor-pointer group hidden md:block"><img src="https://lh3.googleusercontent.com/pw/AP1GczNlG-AUXVncyFFfcf5OJ1J6LEmeffkFnv0A83_GjZFse0Q4jvWqXO1YFpOm6JLufoH-I383iLHOniAKDhUOMh89Essrm3IB4X_d9JE3FZNr2SCuyXtQkyuvn36hPMwqvo6qDCzqdopVKIGCLZs9PicyzQ=w1706-h960-s-no-gm?authuser=0" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"></div>
+                    <div class="aspect-square bg-stone-800 rounded-lg overflow-hidden cursor-pointer group hidden md:block"><img src="https://lh3.googleusercontent.com/pw/AP1GczO5AO8s6DHGc0h-OL0qxflDIhaOoNtXnTpsPXwXeuwJKpTkfg7SLB-S-Ne6AEGoh4d5SeshpXO1QlIRfTjE9ikoJT3yM6uk7GlTnaXOxmadx-BHf_AceYeLKVE6J5cNxQsiSe-NidyhjVcOMQHrSBrMiA=w1549-h1033-s-no-gm?authuser=0" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Full Report / Thesis Section -->
+    <section id="thesis" class="py-32 bg-stone-100">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="bg-white rounded-3xl p-10 md:p-16 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-stone-100 flex flex-col md:flex-row items-center gap-12 lg:gap-20 reveal">
+                
+                <!-- Left: Mockup Cover -->
+                <div class="w-full md:w-2/5 aspect-[3/4] bg-stone-200 rounded-xl overflow-hidden relative shadow-lg group">
+                    <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=800&auto=format&fit=crop" alt="Thesis Cover" class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-stone-900/60 to-transparent opacity-80"></div>
+                    <div class="absolute bottom-0 left-0 p-8 text-white">
+                        <p class="text-xs tracking-widest uppercase mb-2 opacity-80">Internship Report</p>
+                        <h4 class="text-xl font-medium">รายงานผลการฝึกประสบการณ์วิชาชีพ</h4>
+                    </div>
+                </div>
+
+                <!-- Right: Content -->
+                <div class="w-full md:w-3/5 text-center md:text-left">
+                    <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-stone-100 text-stone-600 text-xs font-medium tracking-widest uppercase mb-6">
+                        <i class="ph-fill ph-file-pdf"></i> Full Documentation
+                    </span>
+                    <h3 class="text-3xl md:text-4xl lg:text-5xl font-medium text-stone-900 mb-6 leading-tight">เอกสารสรุปผล<br>การฝึกงานฉบับสมบูรณ์</h3>
+                    <p class="text-stone-500 font-light leading-relaxed mb-10 max-w-lg mx-auto md:mx-0">
+                        สามารถดาวน์โหลดเล่มรายงานฉบับเต็ม เพื่อดูรายละเอียดเชิงลึกเกี่ยวกับการวิเคราะห์ระบบงาน ปัญหา อุปสรรค และข้อเสนอแนะที่ได้จากการฝึกงาน
+                    </p>
+                    
+                    <div class="flex flex-wrap justify-center md:justify-start gap-4">
+                        <!-- รอลิงก์เล่มจากเพื่อนมาใส่ตรง href -->
+                        <a href="#" target="_blank" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-stone-900 text-stone-50 rounded-full font-medium hover:bg-stone-800 transition-all hover:shadow-lg hover:-translate-y-1 w-full sm:w-auto">
+                            <i class="ph-light ph-download-simple text-xl"></i> เปิดอ่านไฟล์ PDF
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Contact -->
+    <footer id="contact" class="bg-stone-200 py-24 border-t border-stone-300">
+        <div class="max-w-5xl mx-auto px-6 lg:px-12 reveal">
+            
+            <!-- โซน: ภายใต้การดูแลและให้คำปรึกษา (ย้ายขึ้นมาก่อนประวัติผู้ทำ) -->
+            <div class="mb-24 border-b border-stone-300 pb-20">
+                <h3 class="text-center text-sm font-semibold tracking-widest text-stone-500 uppercase mb-12">ภายใต้การดูแลและให้คำปรึกษา</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    
+                    <!-- อาจารย์นิเทศก์ (กรอบรูป Inset Frame) -->
+                    <div class="bg-white rounded-3xl p-6 shadow-sm border border-stone-100 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-6 transition-all hover:shadow-md">
+                        <!-- Inset Frame: พื้นหลังขาว มีขอบ ช่วยให้รูปดูเรียบร้อยขึ้น -->
+                        <div class="w-28 h-28 md:w-32 md:h-32 rounded-2xl bg-white p-1 border border-stone-200 shadow-sm flex-shrink-0">
+                             <img src="https://lh3.googleusercontent.com/pw/AP1GczNWeXeniWGbmCG1sIJZBoiAG3HPK7gAFoAPa0w9Gnsv3Nr6txsMGzFycVF3ipnxDN3-YnC9uN6R-mQBUkvmaYmM_KsXYrAbOH8-f1l3wSbGMY8ONIXjORs_16Ew_vOII1TJB_OEoc1vFO1iLiAD0uvwiA=w433-h737-s-no-gm?authuser=0" alt="Advisor" class="w-full h-full object-cover rounded-xl object-top">
+                        </div>
+                        <div class="flex-1 py-1">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 bg-stone-100 text-stone-600 text-[10px] font-bold tracking-widest uppercase rounded-full mb-3">
+                                <i class="ph-fill ph-chalkboard-teacher text-sm"></i> อาจารย์นิเทศก์
+                            </div>
+                            <h4 class="text-lg font-medium text-stone-900">ผศ. ดร.ฐิติชัย รักบำรุง</h4>
+                            <p class="text-sm text-stone-500 mb-2">Asst. Prof. Thitichai Ruckbumrung</p>
+                            <p class="text-xs text-stone-500 leading-relaxed">ปร.ด. (เทคโนโลยีการศึกษา)<br>คณะศึกษาศาสตร์ มหาวิทยาลัยบูรพา</p>
+                        </div>
+                    </div>
+
+                    <!-- พี่เลี้ยงฝึกงาน (Company Supervisor Placeholder) -->
+                    <div class="bg-white rounded-3xl p-6 shadow-sm border border-stone-100 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-6 transition-all hover:shadow-md">
+                        <!-- Inset Frame -->
+                        <div class="w-28 h-28 md:w-32 md:h-32 rounded-2xl bg-white p-1 border border-stone-200 shadow-sm flex-shrink-0">
+                             <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=400&auto=format&fit=crop" alt="Supervisor Placeholder" class="w-full h-full object-cover rounded-xl opacity-70 grayscale">
+                        </div>
+                        <div class="flex-1 py-1">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 bg-stone-100 text-stone-600 text-[10px] font-bold tracking-widest uppercase rounded-full mb-3">
+                                <i class="ph-fill ph-briefcase text-sm"></i> พี่เลี้ยงการฝึกงาน
+                            </div>
+                            <h4 class="text-lg font-medium text-stone-900">[ รอชื่อพี่เลี้ยงฝึกงาน ]</h4>
+                            <p class="text-sm text-stone-500 mb-2">[ รอระบุตำแหน่งงาน ]</p>
+                            <p class="text-xs text-stone-500 leading-relaxed">บริษัท ทีพีบีไอ จำกัด (มหาชน)</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- โซน: ประวัติผู้จัดทำ -->
+            <div class="text-center mb-8">
+                <!-- รูปโปรไฟล์เพื่อน -->
+                <div class="relative inline-block">
+                    <img src="https://lh3.googleusercontent.com/pw/AP1GczPiV-pmDY5Zfga6PC5cXd7VvJpOLVw01ccbgzJB2G_fl6CxUX8fU8daTbcZXPf9qL0TkaFLhlfViDatIBvTT4b3b7pWcogfVlMQEqYAR079Vfjf6cqW035gsAJIaBGCN_fV-yRPFUVzLFduliP_mIVDcw=w1549-h1033-s-no-gm?authuser=0" alt="Profile Picture" class="w-32 h-32 rounded-full object-cover mx-auto shadow-md border-4 border-white relative z-10">
+                    <div class="absolute inset-0 rounded-full shadow-[0_0_20px_rgba(0,0,0,0.1)] z-0"></div>
+                </div>
+                
+                <h3 class="text-3xl md:text-4xl font-medium text-stone-900 mt-6 mb-2">นางสาว ณัฐกานต์ รัตนะพันธ์</h3>
+                <p class="text-stone-500 font-light text-lg mb-8">อายุ 27 ปี &bull; มหาวิทยาลัยบูรพา</p>
+                
+                <!-- ข้อมูลติดต่อพร้อมไอคอน -->
+                <div class="flex justify-center items-center gap-6 mb-8 text-stone-700 font-light">
+                    <a href="tel:0624324171" class="flex items-center gap-2 hover:text-stone-900 transition-colors">
+                        <i class="ph-fill ph-phone text-xl text-stone-500"></i> 062-432-4171
+                    </a>
+                    <a href="mailto:67540021@buu.go.ac.th" class="flex items-center gap-2 hover:text-stone-900 transition-colors">
+                        <i class="ph-fill ph-envelope-simple text-xl text-stone-500"></i> 67540021@buu.go.ac.th
+                    </a>
+                </div>
+                
+                <p class="text-stone-600 font-light max-w-2xl mx-auto mb-10 text-sm leading-relaxed italic border-l-2 border-stone-400 pl-4 text-left md:text-center md:border-l-0 md:border-t md:pt-6">
+                    "จากก้าวแรกสู่ก้าวที่เติบโตขึ้น ขอบคุณความท้าทายในสายงาน HR ที่ช่วยขัดเกลาทักษะรอบด้าน ประสบการณ์ที่นี่คือรากฐานสำคัญที่จะทำให้ดิฉันพัฒนาตัวเองต่อไปอย่างไม่หยุดยั้ง"
+                </p>
+            </div>
+
+            <div class="text-xs text-stone-400 uppercase tracking-widest pt-8 border-t border-stone-300 text-center">
+                <p>&copy; 2026 Internship Portfolio. Nattakan R.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Navbar Scroll Effect
+            const nav = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    nav.classList.add('nav-scrolled');
+                    nav.classList.remove('py-5');
+                    nav.classList.add('py-3');
+                } else {
+                    nav.classList.remove('nav-scrolled');
+                    nav.classList.add('py-5');
+                    nav.classList.remove('py-3');
+                }
+            });
+
+            // Mobile Menu Toggle
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+            const mobileIcon = mobileBtn.querySelector('i');
+
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                if (mobileMenu.classList.contains('hidden')) {
+                    mobileIcon.classList.remove('ph-x');
+                    mobileIcon.classList.add('ph-list');
+                } else {
+                    mobileIcon.classList.remove('ph-list');
+                    mobileIcon.classList.add('ph-x');
+                }
+            });
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileIcon.classList.remove('ph-x');
+                    mobileIcon.classList.add('ph-list');
+                });
+            });
+
+            // Intersection Observer (Scroll Reveal)
+            const revealElements = document.querySelectorAll(".reveal");
+            const revealOptions = {
+                threshold: 0.1,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("active");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, revealOptions);
+
+            revealElements.forEach(el => revealOnScroll.observe(el));
+
+            // Hero Background Slider Logic
+            const bgImages = [
+                'https://lh3.googleusercontent.com/pw/AP1GczOpxnFYO50Dw02ufzbsLqbYpnnv8cpb6OjLOyFVPDjdC404H5lwiiY1IwbxxOFwJ3ScQXCe-IBFumE8Xr43blzzEUup9Y1EQpKfQgDD_r9JjOrOmcy60OmPN9dI8y1FV1YMv4FKGR9e5e8OcJoP4wxzVw=w1075-h721-s-no-gm?authuser=0',
+                'https://lh3.googleusercontent.com/pw/AP1GczND71TyVVzXKBvKGIszM1WREyN8liPZcnzTDOgGc9dH-g_miVQG-RcUKklezf9Vd4Fik7sOUpw-Ydt2lbPNbEQ3Gv_WzazT3b9XvmEByPs58gCP7BRKf5SauXfc6QgJaMhc3d0HZDekLf9rjsbB8PiTtQ=w1706-h960-s-no-gm?authuser=0',
+                'https://lh3.googleusercontent.com/pw/AP1GczNlG-AUXVncyFFfcf5OJ1J6LEmeffkFnv0A83_GjZFse0Q4jvWqXO1YFpOm6JLufoH-I383iLHOniAKDhUOMh89Essrm3IB4X_d9JE3FZNr2SCuyXtQkyuvn36hPMwqvo6qDCzqdopVKIGCLZs9PicyzQ=w1706-h960-s-no-gm?authuser=0',
+                'https://lh3.googleusercontent.com/pw/AP1GczO5AO8s6DHGc0h-OL0qxflDIhaOoNtXnTpsPXwXeuwJKpTkfg7SLB-S-Ne6AEGoh4d5SeshpXO1QlIRfTjE9ikoJT3yM6uk7GlTnaXOxmadx-BHf_AceYeLKVE6J5cNxQsiSe-NidyhjVcOMQHrSBrMiA=w1549-h1033-s-no-gm?authuser=0',
+                'https://lh3.googleusercontent.com/pw/AP1GczPiV-pmDY5Zfga6PC5cXd7VvJpOLVw01ccbgzJB2G_fl6CxUX8fU8daTbcZXPf9qL0TkaFLhlfViDatIBvTT4b3b7pWcogfVlMQEqYAR079Vfjf6cqW035gsAJIaBGCN_fV-yRPFUVzLFduliP_mIVDcw=w1549-h1033-s-no-gm?authuser=0'
+            ];
+            
+            let currentImageIdx = 0;
+            const sliderEl = document.getElementById('hero-bg-slider');
+
+            // Preload images to avoid flickering
+            bgImages.forEach(src => {
+                const img = new Image();
+                img.src = src;
+            });
+
+            setInterval(() => {
+                currentImageIdx = (currentImageIdx + 1) % bgImages.length;
+                sliderEl.style.backgroundImage = `url('${bgImages[currentImageIdx]}')`;
+            }, 4000); // เปลี่ยนรูปทุกๆ 4 วินาที
+        });
+    </script>
+</body>
+</html>
